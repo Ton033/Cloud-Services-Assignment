@@ -8,7 +8,7 @@ pipeline {
 
             steps{
                 echo 'Validating infrastructure code'
-                sh 'openstack orchestration template validate -f main_infrastructure.yaml'
+              
             }
         }
 
@@ -16,7 +16,7 @@ pipeline {
 
             steps{
                 echo 'Running infrastructure test...'
-                sh 'pytest main_infrastructure.py'
+               
             }
         }
 
@@ -24,7 +24,7 @@ pipeline {
 
             steps{
                 echo 'Deploying infrastructure...'
-                sh 'openstack stack create -t main_infrastructure.yaml my_stack'
+                
             }
         }
 

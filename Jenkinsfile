@@ -8,7 +8,7 @@ pipeline {
 
             steps{
                 echo 'Validating infrastructure code'
-                
+                sh 'heat template-validate -f main_infrastructure.yaml'
               
             }
         }

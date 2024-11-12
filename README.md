@@ -1,4 +1,7 @@
 # Cloud-Services-Assignment
 
-Github went down while working on the assignment
-Usign jenking to implement a balanced test suite
+Using jenking to implement a balanced test suite
+Im using Jenkins to automate the deploymment of of infrastructure of main_infrastructure.yaml. 
+The pipeline will have unit testing, syntax validation, integration testing, and final deployment.
+
+

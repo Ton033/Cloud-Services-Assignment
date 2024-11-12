@@ -8,8 +8,8 @@ pipeline {
 
             steps{
                 echo 'Validating infrastructure code'
-                sh 'yamllint main_infrastructure.yaml' 
-                sh 'heat-template-validate -f main_infrastructure.yaml'
+                sh 'openstack orchestration template validate -f main_template.yaml'
+                
               
             }
         }
@@ -18,7 +18,7 @@ pipeline {
 
             steps{
                 echo 'Running infrastructure test...'
-                sh 'inspec exec tests/'
+                sh 'pytest main_infrastructure.py'
                
             }
         }
@@ -27,18 +27,18 @@ pipeline {
 
             steps{
                 echo 'Deploying infrastructure...'
-                sh 'openstack stack create -t main_infrastructure.yaml --parameter ...'
+                sh 'openstack stack create -t main_template.yaml my_stack'
                 
             }
         }
 
     }
 
-    post {
-        always {
-            echo 'Cleaning up resources...'
-            // Optional cleanup step if infrastructure is temporary
-            sh 'openstack stack delete your-stack-name --yes'
+    stage("cleanup") {
+            steps {
+                echo 'Cleaning up resources...'
+                // Clean up the stack on OpenStack to avoid unnecessary charges or resource usage
+                sh 'openstack stack delete my_stack --yes'
+            }
         }
-    }
 }

@@ -8,6 +8,8 @@ pipeline {
 
             steps{
                 echo 'Validating infrastructure code'
+                sh 'yamllint main_infrastructure.yaml' 
+                sh 'heat-template-validate -f main_infrastructure.yaml'
               
             }
         }
@@ -16,6 +18,7 @@ pipeline {
 
             steps{
                 echo 'Running infrastructure test...'
+                sh 'inspec exec tests/'
                
             }
         }
@@ -24,9 +27,18 @@ pipeline {
 
             steps{
                 echo 'Deploying infrastructure...'
+                sh 'openstack stack create -t main_infrastructure.yaml --parameter ...'
                 
             }
         }
 
+    }
+
+    post {
+        always {
+            echo 'Cleaning up resources...'
+            // Optional cleanup step if infrastructure is temporary
+            sh 'openstack stack delete your-stack-name --yes'
+        }
     }
 }

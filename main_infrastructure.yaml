@@ -1,5 +1,6 @@
-heat_template_version: 2015-04-30
-description: Simple template to learn
+
+heat_template_version: 2015-04-30 #Template version
+description: The main infrastructure
 resources:
   TPVM:
     type: OS::Nova::Server

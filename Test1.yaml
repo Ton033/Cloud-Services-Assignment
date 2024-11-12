@@ -1,0 +1,10 @@
+heat_template_version: 2015-04-30
+description: Simple template to learn
+resources:
+  TPVM:
+    type: OS::Nova::Server
+    properties:
+      flavor: gx3.1c4r
+      image: Windows Server 2022 Standard [Evaluation]
+      networks:
+        - network: TestTP

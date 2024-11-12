@@ -34,11 +34,4 @@ pipeline {
 
     }
 
-    stage("cleanup") {
-            steps {
-                echo 'Cleaning up resources...'
-                // Clean up the stack on OpenStack to avoid unnecessary charges or resource usage
-                sh 'openstack stack delete my_stack --yes'
-            }
-        }
 }
